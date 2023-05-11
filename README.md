@@ -30,7 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### directory 구조 (cmd /a /f)
 
-    ```sql
+```sql
     \---enjoy-trip
         |   .browserslistrc
         |   .eslintrc.js
@@ -60,4 +60,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
                     HomeView.vue
 
 
-    ```
+```
