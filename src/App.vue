@@ -1,18 +1,39 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <!-- <router-link to="/about">About</router-link> -->
-    </nav>
-    <router-view />
+    <div class="sidebar">
+      <TheSidebar />
+    </div>
+    <div class="view">
+      <nav>
+        <router-link to="/">Home</router-link> |
+        <!-- <router-link to="/about">About</router-link> -->
+      </nav>
+      <router-view />
+    </div>
   </div>
 </template>
 <script>
-//sidebar, head import 하기
-export default {};
+import TheSidebar from "./components/include/TheSidebar.vue";
+//import sidebar
+
+export default {
+  components: {
+    TheSidebar,
+  },
+};
 </script>
 
 <style>
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  display: flex;
+}
+/* 화면의 사이드바와 뷰 레이아웃 수정하기 */
+.view {
+  display: flex;
+}
 /*
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
