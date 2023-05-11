@@ -28,7 +28,7 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-    # directory 구조 (cmd /a /f)
+### directory 구조 (cmd /a /f)
 
     ```sql
     \---enjoy-trip
