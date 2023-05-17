@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeVue from "@/views/HomeVue.vue";
+import MyPageVue from "@/views/auth/MypageView.vue";
 
 Vue.use(VueRouter);
 
@@ -69,6 +70,7 @@ const routes = [
   {
     path: "/auth/mypage",
     name: "mypage",
+    component: MyPageVue,
     redirect: "",
     children: [
       {
