@@ -12,10 +12,16 @@
         </div>
         -->
         <span>or use your email for registration</span>
-        <input type="text" id="registUsername" v-model="registUsername" placeholder="Name" />
-        <input type="email" id="registEmail" v-model="registEmail" placeholder="Email" />
+        
+        <div><input type="text" id="registEmail" v-model="registEmail" placeholder="Email(Gmail만)" style="width:65%" /> @gmail.com <button type="button" @click="verifyEmail">인증하기</button></div>
+        <div><input type="text" id="verifyCode" v-model="verifyCode" placeholder="인증코드" /><button type="button" @click="isValid" id="verifyButton" ref="verifyButton" v-bind:disabled="this.disableVerifyButton==true">인증확인</button></div>
+        
         <input type="password" id="registPassword" v-model="registPassword" placeholder="Password" />
-        <button type="submit">Sign Up</button>
+        <input type="text" id="registUsername" v-model="registUsername" placeholder="Name" />
+        <input type="text" id="registGender" v-model="registGender" placeholder="Gender" />
+        <input type="number" id="registAge" v-model="registAge" placeholder="Age" />
+        
+        <button type="submit" v-bind:disabled="this.disableSignupButton==true">Sign Up</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
@@ -29,7 +35,7 @@
         </div>
         -->
         <span>or use your account</span>
-        <input type="email" id="loginEmail" v-model="loginEmail" placeholder="Email" />
+        <div><input type="text" id="loginEmail" v-model="loginEmail" placeholder="Email" style="width:65%" /> @gmail.com</div>
         <input type="password" id="loginPassword" v-model="loginPassword" placeholder="Password" />
         <a href="#">Forgot your password?</a>
         <button>Sign In</button>
@@ -55,6 +61,8 @@
 
 
 <script>
+import http from "@/util/http"
+
 export default {
     name:"LoginAndRegistView",
     data(){
@@ -63,8 +71,14 @@ export default {
             registUsername : "",
             registEmail:"",
             registPassword:"",
+            registGender:"",
+            registAge: 0,
             loginEmail:"",
-            loginPassword:""
+            loginPassword:"",
+            verifyCode:"",
+            verifyCodeCheck:"",
+            disableVerifyButton: true, //default 비활성화
+            disableSignupButton: true //회원가입 버튼 default 비활성화
         }
     },
     methods:{
@@ -75,12 +89,78 @@ export default {
         regist(){
             console.log(this.registUsername, this.registEmail, this.registPassword);
             //axios.post("url").then((res)=>{})
+            http.post("/auth/signup", {
+              //email, password, name, gender, age
+              email:this.registEmail+`@gmail.com`,
+              password: this.registPassword,
+              name: this.registUsername,
+              gender: this.registGender,
+              age: this.registAge
+            })
+            .then((res)=>{
+              console.log("회원가입 성공:", res);
+            })
+            .catch((err)=>{
+              console.log("회원가입 실패: ", err);
+            })
         },
         login(){
             console.log(this.loginEmail, this.loginPassword);
             //axios.post("url").then((res)=>{})
+            
+        },
+        verifyEmail(){ //이메일 인증하기
+          //인증 전에는 Sign up 버튼 비활성화?
+          //1. 일단, db에 있는지 확인(중복확인)
+          //이미 중복이메일이라면, alert로 중복임을 띄우고 종료
+          let email = this.registEmail+`@gmail.com`;
+          http.post("/auth/emailCheck", {
+            email: email
+          })
+          .then((res1)=>{ 
+            //정상응답(200 ok) 인 경우, 이메일 중복안됨
+            //2. 중복이 아니라면, 이메일이 유효한지 체크
+            console.log(res1);
+            http.post("/mail/sendmail", {
+              type:"register",
+              email: email
+            })
+            .then((res2)=>{
+              //3. 유효한 이메일이라면, 인증코드 전송 후 체크
+              alert("이메일로 인증코드가 발송되었습니다. 인증코드를 입력해 주세요. (발송까지 최대 5분 소요)")
+              const result = res2.data.message;
+              if(result=="SUCCESS"){ //유효한 이메일인 경우
+                this.verifyCodeCheck = res2.data.code;
+                //인증확인 버튼 활성화
+                // this.$refs.verifyButton
+                this.disableVerifyButton = false;
+              }
+              else{ //유효하지 않은 이메일인 경우
+                //유효하지 않은 이메일입니다(메시지 띄움)
+                //인증확인 버튼 비활성화
+                this.disableVerifyButton = true;
+              }
+            })
+          })
+          .catch((err)=>{
+            alert("이메일이 중복되었습니다.");
+            console.log(err);
+          })
+        },
+        isValid(){ //입력한 인증코드가 일치하는지 체크
+            //인증코드 일치하면 인증확인 버튼 비활성화 및 인증완료로 문구 변경?
+            //그리고 regist버튼 활성화
+            if(this.verifyCode==this.verifyCodeCheck){
+              this.disableVerifyButton = true;
+              this.$refs.verifyButton.innerText = "인증완료";
+              this.disableSignupButton = false;
+            }
+            else{
+              console.log("인증코드 틀림");
+              //인증 코드가 틀렸다는 문구 띄워줌
+              this.disableSignupButton = true;
+            }
         }
-
     },
     updated:{
 
@@ -159,6 +239,11 @@ button:focus {
   outline: none;
 }
 
+button:disabled{
+  background-color: coral;
+  border-color: coral;
+}
+
 button.ghost {
   background-color: transparent;
   border-color: #FFFFFF;
@@ -183,6 +268,7 @@ input {
   width: 100%;
 }
 
+
 .container {
   background-color: #fff;
   border-radius: 10px;
@@ -194,10 +280,13 @@ input {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
       0 10px 10px rgba(0,0,0,0.22);
   position: relative;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  overflow: auto;
+  
   width: 768px;
   max-width: 100%;
-  min-height: 480px;
+  /* min-height: 480px; */
+  min-height: 650px;
 }
 
 .form-container {
