@@ -5,25 +5,19 @@
       :pagination="true"
       :modules="modules"
       :autoplay="{
-        delay: 2500,
+        delay: 5000,
         disableOnInteraction: false,
       }"  
       @swiper="onSwiper"
       @slideChange="onSlideChange"
     >
       <swiper-slide
-        v-for="n in 3"
-        :key="n"
+        v-for="(content, i) in swipercontents"
+        :key="i"
         class="test"
         :class="{ test_2: true }"
       >
-        <img
-          :src="getImageUrl(29 + n)"
-          
-          height="30px"
-          class="img-fluid"
-          blank="true"
-        />
+      <SwiperItem :content="content"></SwiperItem>
       </swiper-slide>
     </swiper>
 </template>
@@ -39,16 +33,46 @@ SwiperCore.use([ Pagination, Autoplay]);
 // Import Swiper styles
 import "swiper/swiper-bundle.css";
 
+// Import Swiper Custom Item
+import SwiperItem from './SwiperItem.vue';
 
   export default {
+    data(){
+      return{
+        swipercontents:[
+          {
+            img:'main_img_1.jpg',
+            title:'Main',
+            desc:'Enjoy the Best Destinations with Our Travel Agency',
+            url:'',
+          },
+          {
+            img:'main_img_2.jpg',
+            title:'Attraction',
+            desc:'Enjoy the Best Destinations with Our Travel Agency',
+            url:'',
+          },
+          {
+            img:'main_img_3.jpg',
+            title:'RentalCar Reservation',
+            desc:'Enjoy the Best Destinations with Our Travel Agency',
+            url:'',
+          },
+          {
+            img:'main_img_4.jpg',
+            title:'Hotel Reservation',
+            desc:'호텔 예약',
+            url:''
+          }
+        ]
+      }
+    },
     components: {
       Swiper,
       SwiperSlide,
+      SwiperItem,
     },
     methods: {
-    getImageUrl(imageId) {
-      return `https://picsum.photos/600/400/?image=${imageId}`;
-    },
     onSwiper(){
       console.log("onSwiper중")
     },
