@@ -23,6 +23,10 @@ export default new Vuex.Store({
     },
     SET_TOKEN(state, payload){
       state.token = payload.token;
+    },
+    CLEAR_USER(state){ //로그아웃 시, localStorage에 저장된 유저 정보 제거
+      state.userInfo = {};
+      state.token = null;
     }
   },
   actions: {
