@@ -39,6 +39,7 @@ export default new Vuex.Store({
         .post("/auth/signin", loginInfo)
         .then((res) => {
           //로그인 성공 시, token, userInfo 정보 세팅됨
+          console.log("로그인 성공");
           console.log("로그인 응답 데이터:", res.data);
           let token = res.data.token;
           context.commit("SET_TOKEN", { token });

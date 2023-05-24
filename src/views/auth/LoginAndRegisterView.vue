@@ -105,8 +105,13 @@ export default {
             })
         },
         login(){
-            console.log(this.loginEmail, this.loginPassword);
-            //axios.post("url").then((res)=>{})
+            // console.log(this.loginEmail, this.loginPassword);
+            let email = this.loginEmail+`@gmail.com`;
+            //store의 login 메소드 호출(로그인 성공시 토큰, 유저정보 localStorage에 저장)
+            this.$store.dispatch("login", {
+              email: email,
+              password: this.loginPassword
+            });
             
         },
         verifyEmail(){ //이메일 인증하기
