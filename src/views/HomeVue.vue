@@ -1,11 +1,11 @@
 <template>
 <div>
-  <hero-view></hero-view>
+  <main-swiper></main-swiper>
 </div>
 </template>
 
 <script>
-import HeroVue from "@/views/componenets/HeroVue.vue";
+import MainSwiperVue from "./componenets/MainSwiperVue.vue";
 export default {
   computed:{
     user(){
@@ -13,7 +13,7 @@ export default {
     }
   },
   components: {
-    "hero-view":HeroVue,
+    "main-swiper":MainSwiperVue
   }
 }
 </script>
