@@ -16,8 +16,9 @@ const routes = [
     name: "search",
   },
   {
-    path: "/attraction/detail",
+    path: "/attraction/detail/:attractionId",
     name: "detail",
+    component:()=>import("@/views/attraction/AttractionDetailView.vue")
   },
   {
     path: "/attraction/record",
