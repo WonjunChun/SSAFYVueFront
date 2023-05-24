@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import http from "@/util/http"
+import Vue from "vue";
+import Vuex from "vuex";
+import http from "@/util/http";
 //jwt 토큰 디코딩 모듈
-import jwtDecode from "jwt-decode"
+import jwtDecode from "jwt-decode";
 //state를 localstorage에 저장
-import {createVuexPersistedState} from "vue-persistedstate";
+import { createVuexPersistedState } from "vue-persistedstate";
 
 Vue.use(Vuex);
 
@@ -12,30 +12,32 @@ export default new Vuex.Store({
   //state를 localStorage에 저장
   plugins: [createVuexPersistedState()],
   state: {
-    userInfo:{},
+    userInfo: {},
     token: null,
   },
 
   mutations: {
     //payload = { userInfo: {...} }
-    SET_USER_INFO(state, payload){
+    SET_USER_INFO(state, payload) {
       state.userInfo = payload.userInfo;
     },
-    SET_TOKEN(state, payload){
+    SET_TOKEN(state, payload) {
       state.token = payload.token;
     },
+
     CLEAR_USER(state){ //로그아웃 시, localStorage에 저장된 유저 정보 제거
       state.userInfo = {};
       state.token = null;
     }
+
   },
   actions: {
-    login(context, loginInfo){
+    login(context, loginInfo) {
       //email, password 정보를 가지고 서버에 로그인 요청
       console.log("로그인정보", loginInfo);
       http
         .post("/auth/signin", loginInfo)
-        .then((res)=>{
+        .then((res) => {
           //로그인 성공 시, token, userInfo 정보 세팅됨
           console.log("로그인 응답 데이터:", res.data);
           let token = res.data.token;
@@ -44,15 +46,15 @@ export default new Vuex.Store({
           const decodedToken = jwtDecode(token);
           console.log("디코딩된 토큰", decodedToken);
           context.commit("SET_USER_INFO", {
-            userInfo:{
+            userInfo: {
               loginedUserId: decodedToken.id,
-              name: decodedToken.name
-            }
+              name: decodedToken.name,
+            },
           });
-        }).catch((err)=>{
+        })
+        .catch((err) => {
           console.log("로그인 실패: ", err);
         });
     },
   },
-
-})
+});
