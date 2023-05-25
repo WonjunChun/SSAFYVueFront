@@ -44,25 +44,30 @@ import SwiperItem from './SwiperItem.vue';
             img:'main_img_1.jpg',
             title:'Main',
             desc:'Enjoy the Best Destinations with Our Travel Agency',
-            url:'',
+            url:'/',
           },
           {
             img:'main_img_2.jpg',
             title:'Attraction',
             desc:'Enjoy the Best Destinations with Our Travel Agency',
-            url:'',
+            url:'/attraction/search',
           },
           {
             img:'main_img_3.jpg',
             title:'RentalCar Reservation',
-            desc:'Enjoy the Best Destinations with Our Travel Agency',
-            url:'',
+            desc:'Enjoy the Best Destinations with Carmore',
+            url:'http://www.carmore.kr',
           },
           {
             img:'main_img_4.jpg',
             title:'Hotel Reservation',
-            desc:'호텔 예약',
-            url:''
+            desc:'Enjoy the Best Destinations with Booking.com',
+            url:'http://www.booking.com'
+          },{
+            img:'main_img_5.jpg',
+            title:'Booking Airplane',
+            desc:'Enjoy the Best Destinations with skyscanner',
+            url:'http://www.skyscanner.co.kr'
           }
         ]
       }
@@ -83,7 +88,7 @@ import SwiperItem from './SwiperItem.vue';
   };
 </script>
 
-<style>
+<style scoped>
 
 
 </style>

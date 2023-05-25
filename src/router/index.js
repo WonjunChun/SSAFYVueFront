@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeVue from "@/views/HomeVue.vue";
 import MyPageVue from "@/views/auth/MypageView.vue";
+import AttractionSearchVue from "@/views/attraction/search/AttractionSearchVue.vue";
 
 Vue.use(VueRouter);
 
@@ -14,11 +15,12 @@ const routes = [
   {
     path: "/attraction/search",
     name: "search",
+    component: AttractionSearchVue,
   },
   {
     path: "/attraction/detail/:attractionId",
     name: "detail",
-    component:()=>import("@/views/attraction/AttractionDetailView.vue")
+    component: () => import("@/views/attraction/AttractionDetailView.vue"),
   },
   {
     path: "/attraction/record",
@@ -63,12 +65,12 @@ const routes = [
   {
     path: "/auth/signin",
     name: "signin",
-    component:()=>import("@/views/auth/LoginAndRegisterView.vue")
+    component: () => import("@/views/auth/LoginAndRegisterView.vue"),
   },
   {
     path: "/auth/signup",
     name: "signup",
-    component:()=>import("@/views/auth/LoginAndRegisterView.vue")
+    component: () => import("@/views/auth/LoginAndRegisterView.vue"),
   },
   {
     path: "/auth/mypage",

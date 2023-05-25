@@ -35,3 +35,8 @@ footer{
   bottom:0;
 }
 </style>
+<style>
+  :root{
+    --main-background-color:#F4F5F7;
+  }
+</style>
