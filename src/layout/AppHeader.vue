@@ -8,7 +8,7 @@
 
             <ul class="navbar-nav navbar-nav-hover ms-auto">
                 <li class="nav-item" style="padding-right:40px">
-                    <a class="nav-link"><span>Attraction</span></a>
+                    <router-link :to="{name:'search'}" class="nav-link"><span>Attraction</span></router-link>
                 </li>
                 <base-dropdown tag="li" class="nav-item">
                     <a slot="title" href="#" class="nav-link" data-toggle="dropdown" role="button"  style="padding-right:60px">

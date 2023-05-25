@@ -3,17 +3,20 @@
     <!-- Attraction Search Form -->
     <search-form></search-form>
     <!-- Attraction List -->
-    <attraction-list></attraction-list>
-    <!-- pagination -->
-    <pagination></pagination>
+    <attraction-list ></attraction-list>
   </div>
 </template>
 
-<script>
+<script scoped>
 import SearchForm from '@/views/components/search/SearchFormVue.vue';
 import AttractionList from '@/views/components/common/AttractionListView.vue';
-import Pagination from '@/views/components/common/PaginationVue.vue';
 export default {
+  data(){
+    return{
+        page:100,
+        record:100
+    };
+  },
   computed:{
     user(){
       return this.$store.state.userInfo;
@@ -22,7 +25,8 @@ export default {
   components: {
     "search-form":SearchForm,
     "attraction-list":AttractionList,
-    "pagination":Pagination
+  },
+  created(){
   }
 }
 </script>

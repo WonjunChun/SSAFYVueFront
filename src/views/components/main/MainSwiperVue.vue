@@ -43,18 +43,18 @@ import SwiperItem from './SwiperItem.vue';
           {
             img:'main_img_1.jpg',
             title:'Main',
-            desc:'Enjoy the Best Destinations with Our Travel Agency',
+            desc:'Enjoy the Best Destinations with Our Travel Service',
             url:'/',
           },
           {
             img:'main_img_2.jpg',
             title:'Attraction',
-            desc:'Enjoy the Best Destinations with Our Travel Agency',
+            desc:'Enjoy the Best Destinations with Our Travel Service',
             url:'/attraction/search',
           },
           {
             img:'main_img_3.jpg',
-            title:'RentalCar Reservation',
+            title:'RentalCar Service',
             desc:'Enjoy the Best Destinations with Carmore',
             url:'http://www.carmore.kr',
           },
