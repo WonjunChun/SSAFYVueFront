@@ -45,10 +45,12 @@
                 <div
                   class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                   <div class="relative">
+                    <a v-bind:href="attraction.img" target="_blank">
                     <img
                       alt="..."
                       v-bind:src="attraction.img"
                       class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+                    </a>
                   </div>
                 </div>
                 <div
@@ -212,4 +214,25 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .description {
+        /* margin:100px;
+        outline: 1px solid black;
+        display: block;
+        color: black;
+        width: 630px;
+        font-size: 20px;
+        font-weight: bolder !important; */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        line-height: 1.2;
+        /* height: 4.8em; */
+        height: 8.4em;
+        /* text-align: left; */
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 7 ;
+        -webkit-box-orient: vertical;
+    }
+</style>
