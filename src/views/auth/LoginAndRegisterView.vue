@@ -99,9 +99,11 @@ export default {
             })
             .then((res)=>{
               console.log("회원가입 성공:", res);
+              alert("회원가입이 완료되었습니다.");
             })
             .catch((err)=>{
               console.log("회원가입 실패: ", err);
+              alert("회원가입에 실패하였습니다.");
             })
         },
         login(){
@@ -111,6 +113,11 @@ export default {
             this.$store.dispatch("login", {
               email: email,
               password: this.loginPassword
+            })
+            .then((res)=>{
+              console.log("로그인 성공: ",res);
+              alert("환영합니다!");
+              this.$router.push('/'); //메인 페이지로 redirect
             });
             
         },
