@@ -81,6 +81,7 @@ const routes = [
       {
         path: "update-info",
         name: "updateInfo",
+        component:()=>import("@/views/auth/components/UserInfoUpdate.vue")
       },
       {
         path: "schedule-manage",
