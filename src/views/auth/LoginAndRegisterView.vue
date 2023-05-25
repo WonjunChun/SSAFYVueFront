@@ -1,8 +1,9 @@
 <template>
+  <div class="pt-5 mt-5">
     <!-- 화면 한쪽으로 쏠리면, LoginAndRegistView 호출하는 뷰 가운데 정렬하기(flex) -->
-    <div :class="{container: true, rightPanelActive: isRegist}" id="container">
-    <div class="form-container sign-up-container">
-        <form v-on:submit.prevent="regist">
+    <div :class="{container: true, rightPanelActive: isRegist}" id="container" >
+    <div class="form-container sign-up-container " >
+        <form v-on:submit.prevent="regist" >
         <h1>Create Account</h1>
         <!--
         <div class="social-container">
@@ -56,6 +57,7 @@
         </div>
     </div>
     </div>
+  </div>
 
 </template>
 

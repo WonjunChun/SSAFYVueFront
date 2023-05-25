@@ -41,7 +41,7 @@
                     <a class="nav-link"><span>Register</span></a>
                 </li> -->
             </ul>
-            <li class="nav-item d-none d-lg-block ml-lg-4">
+            <li v-if="isNotLogined()" class="nav-item d-none d-lg-block ml-lg-4">
                     <router-link :to="{ name: 'signin'}" rel="noopener"
                        class="btn btn-neutral btn-icon">
                 <span class="btn-inner--icon">
@@ -49,6 +49,24 @@
                 </span>
                         <span class="nav-link-inner--text">Login</span>
                     </router-link>
+                </li>
+                <li v-if="isLogined()" class="nav-item d-none d-lg-block ml-lg-4" style="padding-right:40px">
+                    <router-link :to="{ name: 'mypage'}" rel="noopener"
+                       class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fa fa-cloud-download mr-2"></i>
+                </span>
+                        <span class="nav-link-inner--text">MyPage</span>
+                    </router-link>
+                </li>
+                <li v-if="isLogined()" class="nav-item d-none d-lg-block ml-lg-4">
+                    <a href="#" rel="noopener"
+                       class="btn btn-neutral btn-icon" @click.prevent="clickLogout()">
+                <span class="btn-inner--icon">
+                  <i class="fa fa-cloud-download mr-2"></i>
+                </span>
+                        <span class="nav-link-inner--text">Logout</span>
+                    </a>
                 </li>
             <!-- <button class="btn btn-outline-success my-2 my-sm-0 na" type="button">Login</button> -->
         </base-nav>
@@ -60,6 +78,25 @@ import BaseDropdown from "@/components/BaseDropdown";
 // import CloseButton from "@/components/CloseButton";
 // import { ref } from 'vue';
 export default {
+    methods:{
+        isLogined(){
+            // console.log("isLogined 수행 중")
+            // console.log(localStorage.vuex);
+            const loginedUserId = this.$store.state.userInfo.loginedUserId;
+            if(loginedUserId){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        isNotLogined(){
+            // console.log(this.$store.state.userInfo.loginedUserId)
+            return this.isLogined()?false:true;
+        },
+        clickLogout(){
+            this.$store.commit('CLEAR_USER');
+        }
+    },
   components: {
     BaseNav,
     // CloseButton,

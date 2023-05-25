@@ -25,7 +25,7 @@
                     </li>
                   </ul>
                 </div> -->
-                <div v-for="(category, i) in categories" :key="i" class="col-md-4 wow fadeInDown col-9" data-wow-delay=".2s">
+                <div v-for="(category, i) in categories" :key="i" class="col-md-4 wow fadeInDown col-9" data-wow-delay=".2s" @click.prevent="goToAttraction">
                   <ul class="list-marked-2 box-categories-list">
                     <li><a href="#"><img :src="getImgSrc(category.img)" alt="" class="category-img"/></a>
                       <h5 class="box-categories-title">{{category.title}}</h5>
@@ -34,7 +34,7 @@
                 </div>
               </div>
             </div>
-          </div><a class="link-classic wow fadeInUp" href="#">Other Tours<span></span></a>
+          </div><a class="link-classic wow fadeInUp" @click.prevent="goToAttraction">Other Tours<span></span></a>
           <!-- Owl Carousel-->
         </div>
       </div>
@@ -67,6 +67,9 @@ export default {
   methods:{
     getImgSrc(img){
       return `${require('@/assets/img/main/category/'+img)}`;
+    },
+    goToAttraction(){
+      this.$router.push({ name: 'search'})
     }
   }
 }

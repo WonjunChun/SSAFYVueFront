@@ -27,8 +27,6 @@ export default {
   created(){
       this.$http.get(url).then(res=>{
         this.populars = res.data;
-        console.log("요청중....")
-        console.log(this.populars)
       }).catch(err=>{
         console.error(err);
       })
