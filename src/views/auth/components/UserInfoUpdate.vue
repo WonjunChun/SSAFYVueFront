@@ -6,7 +6,7 @@
         <label for="password">비밀번호</label><input type="password" name="password" v-model="password" /><br />
         <label for="newpassword">새 비밀번호</label><input type="password" name="newpassword" v-model="newpassword" /><br />
         <label for="newpasswordcheck">새 비밀번호 확인</label><input type="password" name="newpasswordcheck" v-model="newpasswordcheck" /><br />
-        <div>새 비밀번호가 일치합니다</div><br />
+        <!--<div ref="">새 비밀번호가 일치합니다</div><br />-->
         <label for="name">이름</label><input type="text" name="name" v-model="name" /><br />
         <label for="gender">성별</label><input type="text" name="gender" v-model="gender" /><br />
         <label for="age">나이</label><input type="number" name="age" v-model="age" /><br />
