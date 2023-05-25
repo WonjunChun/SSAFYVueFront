@@ -1,22 +1,26 @@
 <template>
-  <!-- <div class="item" :style="{'background-image': 'url(~@/assets/img/main/main_img_1.jpg)'}"> -->
-  <div class="item">
-    <div class="container">
+  <div class="item" :style="backgroundImageInlineStyle">
+    <div class="container" >
       <h6 class="item-desc">{{ content.desc }}</h6>
       <h1 class="item-title">{{ content.title }}</h1>
-      <button class="item-click-btn" @click="clickItem">Get In Touch</button>
+      <button class="item-click-btn" @click="clickItem(content.url)">Get In Touch</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+    methods:{
+      clickItem(url){
+        window.open(url);
+      }
+    },
     props:{
-        content:Array
+        content:Object
     },
     computed:{
       backgroundImageInlineStyle(){
-        return `background-image: url('./assets/img/main/${this.content.img}')`;
+        return `background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${require('@/assets/img/main/'+this.content.img)})`;
         // return `background-image: url("${this.content.img}");`;
       }
     }
@@ -33,7 +37,7 @@ div.item{
     background-repeat : no-repeat;
     background-size : cover ;
     background-position: center;
-    background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url('~@/assets/img/main/main_img_1.jpg');
+    /* background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url('~@/assets/img/main/main_img_1.jpg'); */
     color:white;
     font-family: 'Lexend', sans-serif !important; 
 }
@@ -41,11 +45,15 @@ div.item{
 h6.item-desc{
   font-size: 100%;
   padding-top: 200px;
+  color:white !important;
+  font-family: 'Lexend', sans-serif !important; 
 }
 
 h1.item-title{
   font-size: 400%;
   font-weight: 700;
+  color:white !important;
+  font-family: 'Lexend', sans-serif !important; 
 }
 
 button.item-click-btn{
